@@ -1,0 +1,4 @@
+"description","user","ad","pass","host","proto","port"
+"mediaserver","root","","Tensiri1$","10.11.10.11","SSH2","22"
+"appserver","Administrator","SCRL","Tensiri1$","10.11.10.10","RDP","3389"
+"sqlserver","Administrator","SCRL","Tensiri1$","10.11.10.202","RDP","3389"
