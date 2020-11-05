@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from mRNGconfCons import confBuilder
 import csvImport
 import argparse
@@ -6,10 +8,13 @@ from os import path
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Decrypt mRemoteNG passwords.")
+    parser = argparse.ArgumentParser(
+        description="Decrypt mRemoteNG passwords.")
     parser.add_argument("-c", "--csv", help="path to csv file")
-    parser.add_argument("-b", "--branch", help="create a branch for this import", default="root")
-    parser.add_argument("-p", "--password", help="password to encrypt connection password", default="mR3m")
+    parser.add_argument(
+        "-b", "--branch", help="create a branch for this import", default="root")
+    parser.add_argument(
+        "-p", "--password", help="password to encrypt connection password", default="mR3m")
 
     if len(sys.argv) < 2:
         parser.print_help(sys.stderr)
@@ -18,22 +23,23 @@ def main():
     args = parser.parse_args()
 
     # initialize the confCons Object
-    #xmlfile = new nMRGconfCons(path.expandvars(r'%APPDATA%\mRemoteNG\confCons.xml'))
-    xmlfile = confBuilder(path.expandvars(r'%APPDATA%\mRemoteNG\Generated.xml'))
+    # xmlfile = new nMRGconfCons(path.expandvars(r'%APPDATA%\mRemoteNG\confCons.xml'))
+    xmlfile = confBuilder(path.expandvars(
+        r'%APPDATA%\mRemoteNG\Generated.xml'))
 
     # load csvfile
     filePath = path.expandvars(args.csv)
     branch = args.branch
     separator = ','
     columns = {
-        'Name': 'description', 
-        'Username': 'user', 
-        'Domain': 'ad', 
-        'Password': 'pass', 
-        'Hostname': 'host', 
-        'Protocol': 'proto', 
+        'Name': 'description',
+        'Username': 'user',
+        'Domain': 'ad',
+        'Password': 'pass',
+        'Hostname': 'host',
+        'Protocol': 'proto',
         'Port': 'port'
-        }
+    }
     csv = csvImport.extract(filePath, branch, separator, columns)
 
     # add csv content to confCons
