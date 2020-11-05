@@ -47,5 +47,3 @@ def decryptAES(encrypted, password):
     plaintext = cipher.decrypt_and_verify(ciphertext, tag)
     return plaintext.decode("utf-8")
 
-if __name__ == "__main__":
-    print(decryptAES(encryptAES("AES Test Passed", ""), ""))
