@@ -46,7 +46,7 @@ def main():
         # add csv content to confCons
         xmlfile.addBranch(branch, csv)
     
-    if args.orion != None:
+    elif args.orion != None:
         print('--importing from orion')
         # parse server connection string
         user = args.orion.split('/')[0]
