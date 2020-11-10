@@ -26,3 +26,26 @@ def extract(host, port, user, password, panel):
         if str(row["nodeid"]) not in tree["members"][str(row["customerid"])]["members"][str(row["siteid"])]["members"]:
             tree["members"][str(row["customerid"])]["members"][str(row["siteid"])]["members"][str(row["nodeid"])] = {"name": str(row["nodename"]), "ip": str(row["nodeip"]), "type": str(row["nodetype"]), "model": str(row["nodemodel"])}   
     
+    children = drill(tree, panel)
+    
+    return children
+
+def drill(element, panel):
+    children = []
+    for key in element["members"]:
+        child = element["members"][key]
+        if "members" not in child:
+            protocol = "SSH2"
+            port = "22"
+            if child["model"] == "":
+                protocol = "Telnet"
+                port = "23"
+            if re.search("prd-srv", child["name"]):
+                protocol = "RDP"
+                port = "3389"
+            children.append(createConnection(child["name"], panel, "[inherit]", "[inherit]", "[inherit]", child["ip"], protocol, port))
+        else: 
+            container = [createContainer(child["name"], panel, "[inherit]", "[inherit]", "[inherit]", "", "", "")]
+            container[-1].extend(drill(child, panel))
+            children.extend(container)
+    return children
