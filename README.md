@@ -12,11 +12,16 @@ Create new branches in confCons.xml for connections details gathered from multip
 ```bash
     python3 main.py -c ".\examples\example.csv" -b "csv"
 ```
-usage: main.py [-h] [-c CSV] [-b BRANCH] [-p PASSWORD]
+## Import from orion into a new branch
+```bash
+    python3 main.py -o "username/password/server/port" -b "Orion"
+```
+usage: main.py [-h] [-c CSV] [-o ORION] [-b BRANCH] [-p PASSWORD]
 
 Decrypt mRemoteNG passwords.
 
 optional arguments:
   -c CSV, --csv CSV                     path to csv file
+  -o ORION, --orion ORION               Orion server user/password/ip/port
   -b BRANCH, --branch BRANCH            create a branch for this import (default is in root)
   -p PASSWORD, --password PASSWORD      password to encrypt connection password
