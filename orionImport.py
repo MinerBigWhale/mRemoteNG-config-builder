@@ -17,3 +17,12 @@ def extract(host, port, user, password, panel):
     content = unidecode.unidecode(content)
     table = json.loads(content)
     
+    tree = {"members": {}}
+    for row in table["results"]:
+        if str(row["customerid"]) not in tree["members"]:
+            tree["members"][str(row["customerid"])] = {"name": str(row["customername"]) + " (" + str(row["customercode"]) + ")", "members": {}}
+        if str(row["siteid"]) not in tree["members"][str(row["customerid"])]["members"]:
+            tree["members"][str(row["customerid"])]["members"][str(row["siteid"])] = {"name": str(row["sitename"]) + " (" + str(row["sitecode"]) + ")", "members": {}}
+        if str(row["nodeid"]) not in tree["members"][str(row["customerid"])]["members"][str(row["siteid"])]["members"]:
+            tree["members"][str(row["customerid"])]["members"][str(row["siteid"])]["members"][str(row["nodeid"])] = {"name": str(row["nodename"]), "ip": str(row["nodeip"]), "type": str(row["nodetype"]), "model": str(row["nodemodel"])}   
+    
