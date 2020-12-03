@@ -8,7 +8,7 @@ Create new branches in confCons.xml for connections details gathered from multip
 ```bash
 git clone https://github.com/MinerBigWhale/mRemoteNG-config-builder.git
 cd mRemoteNG-config-builder
-pip3 install pycryptodomex
+pip3 install -r requirements.txt
 ```
 
 ## Import csv file into a new branch
